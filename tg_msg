@@ -1,0 +1,28 @@
+#!/opt/bin/bash
+
+filename="/tmp/msg"
+chat_id="-1001234567890"
+
+export 'LANG=C.UTF-8'
+export 'LANGUAGE=C.UTF-8'
+
+TOKEN='123456789:AAAAAAAthis_is_your_tokenAAAAAAAAAA'
+URL='https://api.telegram.org/bot'$TOKEN
+MSG_URL=$URL'/sendMessage?chat_id='
+
+function send_message {
+	text='"text"'
+	msg=\"$2\"
+	res=$(curl -X POST -H "Content-Type: application/json; charset=utf-8" -insecure --data "{$text:$msg}" "$MSG_URL$1&parse_mode=HTML")
+	echo "{$text:$msg}"
+	echo "$MSG_URL$1&"
+	echo $res
+}
+
+if [ -f $filename ]
+then
+    msg=$(cat $filename)
+    prefix=$'It seems that someone appeared online!\n'
+    msg=$prefix$msg
+    send_message $chat_id "$msg"
+fi
