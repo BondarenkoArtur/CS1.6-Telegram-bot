@@ -1,4 +1,4 @@
-#!/opt/bin/bash
+#!/bin/bash
 
 filename="/tmp/msg"
 chat_id="-1001234567890"
